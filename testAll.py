@@ -1,0 +1,15 @@
+import pickle
+import bz2
+N=float(input("Enter N="))
+P=float(input("Enter P="))
+K=float(input("Enter K="))
+temp=float(input("Enter temp="))
+Hum=float(input("Enter Humdity="))
+Ph=float(input("Enter Ph="))
+Rain=float(input("Enter RainFall="))
+sfile = bz2.BZ2File('All Model', 'r')
+model=pickle.load(sfile)
+test_prediction = model[5].predict([[N,P,K,temp,Hum,Ph,Rain]])
+le=pickle.load(open('le.pkl', 'rb'))
+label=le.inverse_transform(test_prediction)
+print(label[0])
